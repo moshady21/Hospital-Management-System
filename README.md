@@ -34,28 +34,6 @@ The system uses JWT authentication, role-based access control, and supports unit
     - Docker Compose setup with app + database
     - .dockerignore
 
-## Project structure
-
-hospital-system-backend/
- ├── src/main/java/com/hospital
- │   ├── config/        # Security & JWT config
- │   ├── controller/    # REST controllers
- │   ├── dto/           # Request/response DTOs
- │   ├── entity/        # Entities (User, Appointment, Medicine, Prescription)
- │   ├── exception/     # Custom exceptions + global handler
- │   ├── repository/    # Spring Data JPA repositories
- │   ├── service/       # Business logic services
- │   ├── mapper/        # mapping between dto and entity
- │   ├── security/      # JWT service and util
- │   └── HospitalSystemApplication.java
- │
- ├── src/test/java/...  # Unit + Integration tests
- ├── Dockerfile
- ├── docker-compose.yml
- ├── .dockerignore
- ├── pom.xml
- └── README.md
-
 ## Tech Stack
 
 - Backend: Spring Boot (Web, Data JPA, Validation, Security)
