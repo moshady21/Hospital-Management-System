@@ -63,3 +63,7 @@ The system uses JWT authentication, role-based access control, and supports unit
 
 - Configured with SLF4J + Logback
 - Log settings can be adjusted in application.properties.
+
+## ERD 
+
+https://drive.google.com/file/d/1HnhY9cLwwAf5tS2y4mTtjgNUzPjl4lOa/view?usp=sharing
