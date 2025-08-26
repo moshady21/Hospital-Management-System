@@ -133,7 +133,6 @@ Edit src/main/resources/application.properties (for MySQL):
 DB_URL=jdbc:mysql://localhost:3306/hospital_db
 spring.datasource.username=root
 spring.datasource.password=password
-JWT_SECRET=yourStrongSecretKeyHere
 ```
 ### 4.🧪 Running the Application
 Using Maven (Command Line)
