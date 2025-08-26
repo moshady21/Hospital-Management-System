@@ -1,4 +1,4 @@
-# 🏥 Hospital System (Back-End)
+# 🏥 Hospital Management System (Back-End)
 **Banque Misr Graduation Project**
 
 **A secure, modular, and testable RESTful API built with Spring Boot, designed to manage patient-doctor interactions, appointments, prescriptions, medicines, pharmacies, and administrative tasks in a hospital environment.**
