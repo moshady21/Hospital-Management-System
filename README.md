@@ -124,8 +124,8 @@ src/
 
 ### 2. Clone the Project
 ```bash
-git clone https://github.com/moshady21/hospital-system-backend.git
-cd hospital-system-backend
+git clone https://github.com/moshady21/Hospital-Management-System.git
+cd Hospital-Management-System
 ```
 ### 2. Configure Database
 Edit src/main/resources/application.properties (for MySQL):
