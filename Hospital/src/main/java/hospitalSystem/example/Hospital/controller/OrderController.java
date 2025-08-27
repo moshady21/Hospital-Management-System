@@ -25,7 +25,7 @@ public class OrderController {
     @PostMapping("/checkout")
     public ResponseEntity<OrderResponseDto> checkout(@AuthenticationPrincipal UserDetails user,
                                                      @Valid @RequestBody OrderRequestDto request) {
-        Long patientId = Long.valueOf(user.getUsername()); // ⚠️ adjust if username != patientId
+        Long patientId = Long.valueOf(user.getUsername()); //  adjust if username != patientId
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(patientId, request));
     }
 
