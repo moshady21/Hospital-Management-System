@@ -65,7 +65,7 @@ public class OrderService {
         order.setTotalPrice(total);
 
         Order savedOrder = orderRepository.save(order);
-        log.info("✅ Order {} created for patient {}", savedOrder.getId(), patientId);
+        log.info(" Order {} created for patient {}", savedOrder.getId(), patientId);
 
         return OrderMapper.toDto(savedOrder);
     }
