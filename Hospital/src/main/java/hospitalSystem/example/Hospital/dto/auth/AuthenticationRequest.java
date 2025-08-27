@@ -1,0 +1,9 @@
+package hospitalSystem.example.Hospital.dto.auth;
+
+import lombok.Data;
+
+@Data
+public class AuthenticationRequest {
+    String email;
+    String password;
+}
