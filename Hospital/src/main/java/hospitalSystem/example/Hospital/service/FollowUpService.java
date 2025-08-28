@@ -1,7 +1,10 @@
 package hospitalSystem.example.Hospital.service;
 
-import org.springframework.stereotype.Service;
+import hospitalSystem.example.Hospital.dto.request.FollowUpRequestDto;
+import hospitalSystem.example.Hospital.dto.response.FollowUpResponseDto;
+import java.util.List;
 
-@Service
-public class FollowUpService {
+public interface FollowUpService {
+    FollowUpResponseDto recordFollowUp(FollowUpRequestDto request, Long doctorId);
+    List<FollowUpResponseDto> getPatientHistory(Long patientId);
 }
