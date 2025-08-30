@@ -70,4 +70,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleAccessDenied(AccessDeniedException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access Denied: " + ex.getMessage());
     }
+
+
+    @ExceptionHandler(IllegalActionException.class)
+    public ResponseEntity<Map<String, Object>> illegalAction(IllegalActionException ex) {
+        Map<String, Object> error = new HashMap<>();
+        error.put("timestamp", LocalDateTime.now());
+        error.put("status", HttpStatus.FORBIDDEN.value());
+        error.put("error", "Out of stock!");
+        error.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
 }
