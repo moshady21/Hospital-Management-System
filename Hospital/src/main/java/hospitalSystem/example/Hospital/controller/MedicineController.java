@@ -65,4 +65,11 @@ public class MedicineController {
         medicineService.deleteMedicine(id);
         return ResponseEntity.noContent().build();
     }
+
+
+    @PreAuthorize("hasAnyRole('PHARMACY', 'DOCTOR')")
+    @GetMapping("/available")
+    public ResponseEntity<List<MedicineResponseDto>> getAllAvailableMedicines(){
+        return ResponseEntity.ok(medicineService.getAvailableMedicines());
+    }
 }

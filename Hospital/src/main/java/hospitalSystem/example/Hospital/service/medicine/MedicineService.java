@@ -9,6 +9,7 @@ import hospitalSystem.example.Hospital.mapper.MedicineMapper;
 import hospitalSystem.example.Hospital.repository.MedicineRepository;
 import hospitalSystem.example.Hospital.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,9 @@ public class MedicineService implements IMedicineService {
     @Override
     public List<MedicineResponseDto> getAllMedicines() {
         List<Medicine> medicines = medicineRepository.findAll();
+        if (medicines.isEmpty()) {
+            throw new ResourceNotFoundException("No Available Medicines found");
+        }
         return medicines.stream().map(MedicineMapper::toDto).toList();
     }
 
@@ -60,6 +64,15 @@ public class MedicineService implements IMedicineService {
     public void deleteMedicine(Long id) {
         Medicine medicine = medicineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Medicine not found"));
         medicineRepository.deleteById(id);
+    }
+
+    @Override
+    public List<MedicineResponseDto> getAvailableMedicines() {
+        List<Medicine> medicines = medicineRepository.findAllWithAvailableQuantity();
+        if (medicines.isEmpty()) {
+            throw new ResourceNotFoundException("No Available Medicines found");
+        }
+        return medicines.stream().map(MedicineMapper::toDto).toList();
     }
 
 

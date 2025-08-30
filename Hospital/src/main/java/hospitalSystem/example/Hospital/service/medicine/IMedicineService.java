@@ -15,4 +15,6 @@ public interface IMedicineService {
     MedicineResponseDto updateMedicine(Long id,String email, MedicineRequestDto newMedicineDto);
 
     void deleteMedicine(Long id);
+
+    List<MedicineResponseDto> getAvailableMedicines();
 }
