@@ -12,7 +12,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/prescriptions")
+@RequestMapping("/api/v1/prescription")
 @RequiredArgsConstructor
 public class PrescriptionController {
 
@@ -28,13 +28,13 @@ public class PrescriptionController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('PATIENT')")
+    @PreAuthorize("hasAnyRole('PATIENT', 'DOCTOR')")
     public ResponseEntity<PrescriptionResponseDto> getPrescription(@PathVariable Long id, Principal principal) {
         return ResponseEntity.ok(prescriptionService.getPrescription(id, principal.getName()));
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('PHARMACY','ADMIN')")
+    @PreAuthorize("hasAnyRole('PHARMACY', 'DOCTOR')")
     public ResponseEntity<List<PrescriptionResponseDto>> getAllPrescriptions() {
         return ResponseEntity.ok(prescriptionService.getAllPrescription());
     }
@@ -45,12 +45,13 @@ public class PrescriptionController {
         return ResponseEntity.ok(prescriptionService.getAllPatientPrescription(principal.getName()));
     }
 
-    @PutMapping("/{id}")
     @PreAuthorize("hasRole('DOCTOR')")
+    @PutMapping("/{id}")
     public ResponseEntity<PrescriptionResponseDto> updatePrescription(
             @PathVariable Long id,
             @RequestBody PrescriptionRequestDto requestDto,
             Principal principal) {
+        System.out.println("Updating prescription");
         return ResponseEntity.ok(prescriptionService.updatePrescription(id, requestDto, principal.getName()));
     }
 }

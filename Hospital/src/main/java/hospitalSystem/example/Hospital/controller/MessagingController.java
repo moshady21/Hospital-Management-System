@@ -6,16 +6,19 @@ import hospitalSystem.example.Hospital.service.messaging.IMessageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/messages")
+@RequestMapping("/api/v1/message")
 @RequiredArgsConstructor
 public class MessagingController {
     private final IMessageService messageService;
+
     @PostMapping()
+    @PreAuthorize("hasAnyRole('DOCTOR','PATIENT')")
     public ResponseEntity<MessageResponseDto>sendMessage(@Valid @RequestBody MessageRequestDto messageRequestDto)
     {
         return ResponseEntity.ok(messageService.sendMessage(messageRequestDto));
@@ -23,6 +26,7 @@ public class MessagingController {
 
     // Get full conversation between doctor & patient
     // Shows all messages exchanged between user 1 and user 2.
+    @PreAuthorize("hasAnyRole('DOCTOR','PATIENT')")
     @GetMapping("/conversation/{senderId}/{receiverId}")
     public ResponseEntity<List<MessageResponseDto>> getConversation(
             @PathVariable Long senderId,
@@ -34,6 +38,7 @@ public class MessagingController {
     //Shows all messages where user with ID=? is the receiver
     //so to get my inbox(all messages that I received) put myId in receivedId
     @GetMapping("/inbox/{receiverId}")
+    @PreAuthorize("hasAnyRole('DOCTOR','PATIENT')")
     public ResponseEntity<List<MessageResponseDto>> getInbox(@PathVariable Long receiverId) {
         return ResponseEntity.ok(messageService.getAllReceivedMessages(receiverId));
     }
@@ -41,6 +46,7 @@ public class MessagingController {
     // Get outbox (all messages sent by a user)
     //Shows all messages where user with ID=? is the sender
     //so to get my outbox(all messages that I sent ) put myId in senderId
+    @PreAuthorize("hasAnyRole('DOCTOR','PATIENT')")
     @GetMapping("/outbox/{senderId}")
     public ResponseEntity<List<MessageResponseDto>> getOutbox(@PathVariable Long senderId) {
         return ResponseEntity.ok(messageService.getAllSentMessages(senderId));

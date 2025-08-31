@@ -18,7 +18,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/medicine")
+@RequestMapping("/api/v1/medicine")
 @RequiredArgsConstructor
 public class MedicineController {
 
@@ -36,13 +36,13 @@ public class MedicineController {
         return ResponseEntity.ok(medicineService.createMedicine(medicineDto, email));
     }
 
-    @PreAuthorize("hasRole('PHARMACY')")
+    @PreAuthorize("hasAnyRole('PHARMACY','DOCTOR','PATIENT')")
     @GetMapping("/{id}")
     public ResponseEntity<MedicineResponseDto> getMedicineById(@PathVariable Long id) {
         return ResponseEntity.ok(medicineService.getMedicineById(id));
     }
 
-    @PreAuthorize("hasRole('PHARMACY')")
+    @PreAuthorize("hasAnyRole('PHARMACY','DOCTOR','PATIENT')")
     @GetMapping
     public ResponseEntity<List<MedicineResponseDto>> getAllMedicines() {
         return ResponseEntity.ok(medicineService.getAllMedicines());
@@ -67,7 +67,7 @@ public class MedicineController {
     }
 
 
-    @PreAuthorize("hasAnyRole('PHARMACY', 'DOCTOR')")
+    @PreAuthorize("hasAnyRole('PHARMACY','DOCTOR','PATIENT')")
     @GetMapping("/available")
     public ResponseEntity<List<MedicineResponseDto>> getAllAvailableMedicines(){
         return ResponseEntity.ok(medicineService.getAvailableMedicines());

@@ -10,26 +10,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/users")
+    @GetMapping("/user")
     public ResponseEntity<List<UserResponseDto>> getAllUsers(){
         return ResponseEntity.ok(adminService.getAll());
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/delete/user/{id}")
+    @DeleteMapping("/user/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id){
         adminService.deleteById(id);
         return ResponseEntity.ok("user with id " + id + " has been deleted");
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/get/user/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<UserResponseDto>getUser(@PathVariable Long id){
         return ResponseEntity.ok(adminService.getById(id));
     }

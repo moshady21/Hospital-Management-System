@@ -544,3 +544,9 @@ Fetches all appointments booked by a specific patient.
 ## ERD 
 
 https://drive.google.com/file/d/1HnhY9cLwwAf5tS2y4mTtjgNUzPjl4lOa/view?usp=sharing
+
+---
+
+## Documentation on postman
+
+https://documenter.getpostman.com/view/38330442/2sB3Hhsh4M
