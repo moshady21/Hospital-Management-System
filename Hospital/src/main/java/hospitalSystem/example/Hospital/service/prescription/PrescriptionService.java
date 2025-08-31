@@ -16,6 +16,7 @@ import hospitalSystem.example.Hospital.service.medicine.MedicineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -41,6 +42,7 @@ public class PrescriptionService implements IPrescriptionService{
         ).collect(Collectors.toList());
 
         Prescription prescription = PrescriptionMapper.toEntity(prescriptionRequestDto, doctor , patient, medicineDetails);
+        prescription.setIssuedAt(LocalDateTime.now());
 
         prescriptionRepository.save(prescription);
 
@@ -99,7 +101,7 @@ public class PrescriptionService implements IPrescriptionService{
 
 
         prescription.setMedicineDetails(updatedDetails);
-        prescription.setIssuedAt(newPrescriptionRequestDto.getIssuedAt());
+        prescription.setIssuedAt(LocalDateTime.now());
 
         Prescription updatedPrescription = prescriptionRepository.save(prescription);
 

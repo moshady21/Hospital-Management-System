@@ -12,7 +12,6 @@ public class PrescriptionMapper {
 
     public static Prescription toEntity(PrescriptionRequestDto dto, User doctor, User patient, List<MedicineDetail> medicineDetails) {
         Prescription prescription = new Prescription();
-        prescription.setIssuedAt(dto.getIssuedAt());
         prescription.setDoctor(doctor);
         prescription.setPatient(patient);
         prescription.setMedicineDetails(medicineDetails);
