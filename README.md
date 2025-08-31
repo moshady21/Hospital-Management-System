@@ -107,7 +107,6 @@ src/
 │   └── resources/
 │       ├── application.properties    # Configs
 │       ├── logback-spring.xml        # Logging config
-│       └── data.sql                  # Optional seed data
 └── test/
     ├── java/                         # Unit & integration tests
     └── resources/                    # Test configs
