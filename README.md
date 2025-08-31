@@ -149,38 +149,6 @@ mvn spring-boot:run
 - GET `/outbox/{senderId}` Get outbox (all messages sent by a user)
 
 ---
-## 🧹 Global Exception Handling
-- Handled via @ControllerAdvice:
-    - ResourceNotFoundException → 404 Not Found
-    - AccessDeniedException → 403 Forbidden
-    - MethodArgumentNotValidException → 400 Bad Request
-    - DataIntegrityViolationException → 409 Conflict
-    - Custom business exceptions
-
----
-
-## 🐳 Docker & Deployment
-
-- Dockerfile Highlights
-    - Multi-stage build: Maven build → JRE slim runtime
-- Docker Compose
-    - Services:
-          - app → Hospital backend
-          - db → MySQL
----
-
-## Logging
-
-- Configured with SLF4J + Logback
-- Log settings can be adjusted in application.properties.
-
----
-
-## ERD 
-
-https://drive.google.com/file/d/1HnhY9cLwwAf5tS2y4mTtjgNUzPjl4lOa/view?usp=sharing
-
----
 ## 📅 Appointment API Endpoints
 
 ### 1. Create an Appointment
@@ -239,3 +207,36 @@ Fetches all appointments booked by a specific patient.
 
 - **Response:**  
   - `200 OK` → List of AppointmentResponseDto objects
+
+---
+
+## 🧹 Global Exception Handling
+- Handled via @ControllerAdvice:
+    - ResourceNotFoundException → 404 Not Found
+    - AccessDeniedException → 403 Forbidden
+    - MethodArgumentNotValidException → 400 Bad Request
+    - DataIntegrityViolationException → 409 Conflict
+    - Custom business exceptions
+
+---
+
+## 🐳 Docker & Deployment
+
+- Dockerfile Highlights
+    - Multi-stage build: Maven build → JRE slim runtime
+- Docker Compose
+    - Services:
+          - app → Hospital backend
+          - db → MySQL
+---
+
+## Logging
+
+- Configured with SLF4J + Logback
+- Log settings can be adjusted in application.properties.
+
+---
+
+## ERD 
+
+https://drive.google.com/file/d/1HnhY9cLwwAf5tS2y4mTtjgNUzPjl4lOa/view?usp=sharing
