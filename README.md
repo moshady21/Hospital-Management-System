@@ -210,6 +210,310 @@ Fetches all appointments booked by a specific patient.
 
 ---
 
+#  Medicine API Endpoints
+
+## Create Medicine
+
+**`POST /api/medicine`**
+
+* **Role:** `PHARMACY`
+* **Body:**
+
+```json
+{
+  "name": "Paracetamol",
+  "price": 25.5,
+  "stockQuantity": 100,
+  "description": "Pain reliever and fever reducer"
+}
+```
+
+* **Response:**
+
+```json
+{
+  "name": "Paracetamol",
+  "price": 25.5,
+  "stockQuantity": 100,
+  "description": "Pain reliever and fever reducer",
+  "pharmacy_id": 3
+}
+```
+
+---
+
+## Get Medicine by ID
+
+**`GET /api/medicine/{id}`**
+
+* **Role:** `PHARMACY`
+* **Path Param:** `id` → Medicine ID
+* **Response:**
+
+```json
+{
+  "name": "Paracetamol",
+  "price": 25.5,
+  "stockQuantity": 100,
+  "description": "Pain reliever and fever reducer",
+  "pharmacy_id": 3
+}
+```
+
+---
+
+## Get All Medicines
+
+**`GET /api/medicine`**
+
+* **Role:** `PHARMACY`
+* **Response:**
+
+```json
+[
+  {
+    "name": "Paracetamol",
+    "price": 25.5,
+    "stockQuantity": 100,
+    "description": "Pain reliever and fever reducer",
+    "pharmacy_id": 3
+  },
+  {
+    "name": "Ibuprofen",
+    "price": 40,
+    "stockQuantity": 50,
+    "description": "Anti-inflammatory and pain reliever",
+    "pharmacy_id": 3
+  }
+]
+```
+
+---
+
+## Update Medicine
+
+**`PUT /api/medicine/{id}`**
+
+* **Role:** `PHARMACY`
+* **Path Param:** `id` → Medicine ID
+* **Body:**
+
+```json
+{
+  "name": "Paracetamol 500mg",
+  "price": 30,
+  "stockQuantity": 200,
+  "description": "Updated description"
+}
+```
+
+* **Response:**
+
+```json
+{
+  "name": "Paracetamol 500mg",
+  "price": 30,
+  "stockQuantity": 200,
+  "description": "Updated description",
+  "pharmacy_id": 3
+}
+```
+
+---
+
+## Delete Medicine
+
+**`DELETE /api/medicine/{id}`**
+
+* **Role:** `PHARMACY`
+* **Path Param:** `id` → Medicine ID
+* **Response:**
+
+```http
+204 No Content
+```
+
+---
+
+## Get All Available Medicines
+
+**`GET /api/medicine/available`**
+
+* **Role:** `PHARMACY`
+* **Response:**
+
+```json
+[
+  {
+    "name": "Paracetamol",
+    "price": 25.5,
+    "stockQuantity": 100,
+    "description": "Pain reliever and fever reducer",
+    "pharmacy_id": 3
+  }
+]
+```
+
+---
+
+# Prescription API Endpoints
+
+## Create Prescription
+
+**`POST /api/prescriptions`**
+
+* **Role:** `DOCTOR`
+* **Body:**
+
+```json
+{
+  "patientId": 12,
+  "medicineDetails": [
+    {
+      "medicineId": 101,
+      "dosage": 2,
+      "instructions": "Take after meals"
+    }
+  ]
+}
+```
+
+* **Response:**
+
+```json
+{
+  "issuedAt": "2025-08-31T13:00:00",
+  "doctorEmail": "doctor@example.com",
+  "patientEmail": "patient@example.com",
+  "medicineDetails": [
+    {
+      "medicineId": 101,
+      "dosage": 2,
+      "instructions": "Take after meals"
+    }
+  ]
+}
+```
+
+---
+
+## Get Prescription by ID
+
+**`GET /api/prescriptions/{id}`**
+
+* **Role:** `PATIENT`
+* **Path Param:** `id` → Prescription ID
+* **Response:**
+
+```json
+{
+  "issuedAt": "2025-08-31T13:00:00",
+  "doctorEmail": "doctor@example.com",
+  "patientEmail": "patient@example.com",
+  "medicineDetails": [
+    {
+      "medicineId": 101,
+      "dosage": 2,
+      "instructions": "Take after meals"
+    }
+  ]
+}
+```
+
+---
+
+## Get All Prescriptions
+
+**`GET /api/prescriptions`**
+
+* **Role:** `PHARMACY`, `ADMIN`
+* **Response:**
+
+```json
+[
+  {
+    "issuedAt": "2025-08-31T13:00:00",
+    "doctorEmail": "doctor@example.com",
+    "patientEmail": "patient@example.com",
+    "medicineDetails": [
+      {
+        "medicineId": 101,
+        "dosage": 2,
+        "instructions": "Take after meals"
+      }
+    ]
+  }
+]
+```
+
+---
+
+## Get Patient Prescriptions
+
+**`GET /api/prescriptions/patient`**
+
+* **Role:** `PATIENT`
+* **Response:**
+
+```json
+[
+  {
+    "issuedAt": "2025-08-31T13:00:00",
+    "doctorEmail": "doctor@example.com",
+    "patientEmail": "patient@example.com",
+    "medicineDetails": [
+      {
+        "medicineId": 101,
+        "dosage": 2,
+        "instructions": "Take after meals"
+      }
+    ]
+  }
+]
+```
+
+---
+
+## Update Prescription
+
+**`PUT /api/prescriptions/{id}`**
+
+* **Role:** `DOCTOR`
+* **Path Param:** `id` → Prescription ID
+* **Body:**
+
+```json
+{
+  "patientId": 12,
+  "medicineDetails": [
+    {
+      "medicineId": 205,
+      "dosage": 1,
+      "instructions": "Take before sleep"
+    }
+  ]
+}
+```
+
+* **Response:**
+
+```json
+{
+  "issuedAt": "2025-08-31T14:00:00",
+  "doctorEmail": "doctor@example.com",
+  "patientEmail": "patient@example.com",
+  "medicineDetails": [
+    {
+      "medicineId": 205,
+      "dosage": 1,
+      "instructions": "Take before sleep"
+    }
+  ]
+}
+```
+
+---
+
 ## 🧹 Global Exception Handling
 - Handled via @ControllerAdvice:
     - ResourceNotFoundException → 404 Not Found
