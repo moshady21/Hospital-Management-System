@@ -7,12 +7,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/appointments")
+@RequestMapping("/api/v1/appointment")
 @RequiredArgsConstructor
 public class AppointmentController {
 
@@ -21,6 +22,7 @@ public class AppointmentController {
     /**
      * Book a new appointment
      */
+    @PreAuthorize("hasRole('PATIENT')")
     @PostMapping
     public ResponseEntity<?> createAppointment(@Valid @RequestBody AppointmentRequestDto dto) {
         try {
@@ -39,6 +41,7 @@ public class AppointmentController {
     /**
      * Cancel an appointment
      */
+    @PreAuthorize("hasAnyRole('PATIENT','ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<AppointmentResponseDto> cancelAppointment(@PathVariable Long id) {
         AppointmentResponseDto response = appointmentService.cancelAppointment(id);
@@ -48,6 +51,7 @@ public class AppointmentController {
     /**
      * Get all appointments for a doctor
      */
+    @PreAuthorize("hasAnyRole('DOCTOR','ADMIN')")
     @GetMapping("/doctor/{doctorId}")
     public ResponseEntity<List<AppointmentResponseDto>> getAppointmentsByDoctor(
             @PathVariable Long doctorId) {
@@ -57,6 +61,7 @@ public class AppointmentController {
     /**
      * Get all appointments for a patient
      */
+    @PreAuthorize("hasAnyRole('PATIENT','ADMIN')")
     @GetMapping("/patient/{patientId}")
     public ResponseEntity<List<AppointmentResponseDto>> getAppointmentsByPatient(
             @PathVariable Long patientId) {

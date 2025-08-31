@@ -107,7 +107,6 @@ src/
 │   └── resources/
 │       ├── application.properties    # Configs
 │       ├── logback-spring.xml        # Logging config
-│       └── data.sql                  # Optional seed data
 └── test/
     ├── java/                         # Unit & integration tests
     └── resources/                    # Test configs
@@ -150,6 +149,67 @@ mvn spring-boot:run
 - GET `/outbox/{senderId}` Get outbox (all messages sent by a user)
 
 ---
+## 📅 Appointment API Endpoints
+
+### 1. Create an Appointment
+**POST** `/appointments`  
+Creates a new appointment between a doctor and a patient.
+
+- **Request Body (JSON):**
+```json
+{
+  "doctorId": 1,
+  "patientId": 2,
+  "appointmentTime": "2025-09-01T10:00:00",
+  "durationMinutes": 30,
+  "notes": "Follow-up visit"
+}
+```
+
+- **Responses:**
+  - `201 Created` → Appointment created successfully (returns AppointmentResponseDto)
+  - `409 Conflict` → Doctor/Patient already booked at that time
+  - `500 Internal Server Error` → Unexpected error
+
+---
+
+### 2. Cancel an Appointment
+**DELETE** `/appointments/{id}`  
+Cancels an existing appointment by ID.
+
+- **Path Variable:**  
+  - `id` → Appointment ID
+
+- **Responses:**
+  - `200 OK` → Appointment successfully cancelled
+  - `404 Not Found` → Appointment not found
+
+---
+
+### 3. Get Appointments by Doctor
+**GET** `/appointments/doctor/{doctorId}`  
+Fetches all appointments assigned to a specific doctor.
+
+- **Path Variable:**  
+  - `doctorId` → Doctor's ID
+
+- **Response:**  
+  - `200 OK` → List of AppointmentResponseDto objects
+
+---
+
+### 4. Get Appointments by Patient
+**GET** `/appointments/patient/{patientId}`  
+Fetches all appointments booked by a specific patient.
+
+- **Path Variable:**  
+  - `patientId` → Patient's ID
+
+- **Response:**  
+  - `200 OK` → List of AppointmentResponseDto objects
+
+---
+
 ## 🧹 Global Exception Handling
 - Handled via @ControllerAdvice:
     - ResourceNotFoundException → 404 Not Found
@@ -180,4 +240,3 @@ mvn spring-boot:run
 ## ERD 
 
 https://drive.google.com/file/d/1HnhY9cLwwAf5tS2y4mTtjgNUzPjl4lOa/view?usp=sharing
-
