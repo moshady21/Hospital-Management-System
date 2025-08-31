@@ -62,12 +62,13 @@ class PrescriptionServiceTest {
 
         requestDto = new PrescriptionRequestDto();
         requestDto.setPatientId(2L);
-        requestDto.setIssuedAt(LocalDateTime.now());
         requestDto.setMedicineDetails(List.of(mdDto));
 
         MedicineDetail mdEntity = MedicineDetailMapper.toEntity(mdDto, medicine);
 
         prescription = PrescriptionMapper.toEntity(requestDto, doctor, patient, List.of(mdEntity));
+        prescription.setIssuedAt(LocalDateTime.now());
+
         prescription.setId(10L);
     }
 

@@ -1,4 +1,4 @@
-package hospitalSystem.example.Hospital.service;
+package hospitalSystem.example.Hospital.service.followUp;
 
 import hospitalSystem.example.Hospital.dto.request.FollowUpRequestDto;
 import hospitalSystem.example.Hospital.dto.response.FollowUpResponseDto;

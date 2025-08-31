@@ -1,4 +1,4 @@
-package hospitalSystem.example.Hospital.service.impl;
+package hospitalSystem.example.Hospital.service.followUp;
 
 import hospitalSystem.example.Hospital.dto.request.FollowUpRequestDto;
 import hospitalSystem.example.Hospital.dto.response.FollowUpResponseDto;
@@ -8,7 +8,6 @@ import hospitalSystem.example.Hospital.entity.User;
 import hospitalSystem.example.Hospital.repository.AppointmentRepository;
 import hospitalSystem.example.Hospital.repository.FollowUpRepository;
 import hospitalSystem.example.Hospital.repository.UserRepository;
-import hospitalSystem.example.Hospital.service.FollowUpService;
 // import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

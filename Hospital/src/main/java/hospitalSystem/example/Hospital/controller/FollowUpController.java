@@ -2,7 +2,7 @@ package hospitalSystem.example.Hospital.controller;
 
 import hospitalSystem.example.Hospital.dto.request.FollowUpRequestDto;
 import hospitalSystem.example.Hospital.dto.response.FollowUpResponseDto;
-import hospitalSystem.example.Hospital.service.FollowUpService;
+import hospitalSystem.example.Hospital.service.followUp.FollowUpService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
